@@ -1,7 +1,7 @@
 import { decode as cborDecode } from '@ipld/dag-cbor'
 import { encode as jsonEncode } from '@ipld/dag-json'
 
-const target = 'https://advertisements.indexer.ipfs.cloudflare.com'
+const target = 'https://advertisements.indexer.ipfs.cloudflare.com/*'
 
 const listener = (details) => {
   let filter = browser.webRequest.filterResponseData(details.requestId)
