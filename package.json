@@ -5,7 +5,8 @@
   "description": "Browser extension decoding dag json",
   "main": "index.js",
   "scripts": {
-    "build": "./node_modules/.bin/esbuild index.js --bundle --outfile=background.js",
+    "build": "esbuild index.js --bundle --outfile=background.js",
+    "bundle": "web-ext build --overwrite-dest",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -13,6 +14,7 @@
   "dependencies": {
     "@ipld/dag-cbor": "^8.0.0",
     "@ipld/dag-json": "^9.0.1",
-    "esbuild": "^0.15.13"
+    "esbuild": "^0.15.13",
+    "web-ext": "^7.3.1"
   }
 }

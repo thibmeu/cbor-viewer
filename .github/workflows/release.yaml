@@ -18,21 +18,13 @@ jobs:
     - name: 🔨 build addon
       run: npm run build
     - name: 🚚 package addon
-      uses: thedoctor0/zip-release@main
-      with:
-        type: 'zip'
-        filename: 'dagcbor-decoder.zip'
-        exclusions: '*.git* /*node_modules/* index.js package*.json'
+      run: npm run bundle
     - name: 💎 upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: 'dagcbor-decoder'
-        path: |
-          background.js
-          manifest.json
-          pen.svg
+        path: web-ext-artifacts/cbor_decoder-0.0.1.zip
     - name: 🚀 deploy
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-       files: 'dagcbor-decoder.zip'
+       files: 'web-ext-artifacts/cbor_decoder-0.0.1.zip'
