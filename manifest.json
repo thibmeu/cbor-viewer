@@ -12,7 +12,7 @@
   "permissions": [
     "webRequest",
     "webRequestBlocking",
-    "https://advertisements.indexer.ipfs.cloudflare.com/b*"
+    "<all_urls>"
   ],
 
   "background": {
