@@ -26,7 +26,7 @@ jobs:
     - name: 💎 upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: 'dagcbor-decoder.zip'
+        name: 'dagcbor-decoder'
         path: |
           background.js
           manifest.json
