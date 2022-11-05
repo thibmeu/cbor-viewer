@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "CBOR decoder",
+  "version": "0.0.1",
+
+  "description": "Decode incoming CBOR request to make them human readable.",
+
+  "icons": {
+    "48": "pen.svg"
+  },
+
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "https://advertisements.indexer.ipfs.cloudflare.com/b*"
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "browser_specific_settings": {
+    "gecko": {
+      "strict_min_version": "57.0a1"
+    }
+  }
+}
+

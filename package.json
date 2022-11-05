@@ -1,0 +1,18 @@
+{
+  "type": "module",
+  "name": "dagcbor-decoder-extension",
+  "version": "0.0.1",
+  "description": "Browser extension decoding dag json",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/esbuild index.js --bundle --outfile=background.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@ipld/dag-cbor": "^8.0.0",
+    "@ipld/dag-json": "^9.0.1",
+    "esbuild": "^0.15.13"
+  }
+}
