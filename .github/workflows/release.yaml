@@ -23,6 +23,11 @@ jobs:
         type: 'zip'
         filename: 'dagcbor-decoder.zip'
         exclusions: '*.git* /*node_modules/* index.js package*.json'
+    - name: 💎 upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: addon
+        path: 'dagcbor-decoder.zip'
     - name: 🚀 deploy
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
