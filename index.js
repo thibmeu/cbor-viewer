@@ -3,6 +3,8 @@ import { encode as jsonEncode } from '@ipld/dag-json'
 
 const target = '<all_urls>'
 
+const cborURLs = {}
+
 const listener = (details) => {
   let filter = browser.webRequest.filterResponseData(details.requestId)
 
@@ -10,11 +12,20 @@ const listener = (details) => {
   const data = []
   filter.ondata = (event) => {
     console.log('ondata')
+    if (!cborURLs[details.url]) {
+      filter.write(event.data)
+      filter.disconnect()
+      return
+    }
     data.push(new Uint8Array(event.data))
   }
 
   filter.onstop = (event) => {
     console.log('stop')
+    if (!cborURLs[details.url]) {
+      filter.disconnect()
+      return
+    }
     const flatten = new Uint8Array(data.flatMap(x => [...x.values()]))
     const jData = jsonEncode(cborDecode(flatten))
     filter.write(jData)
@@ -26,8 +37,9 @@ const listener = (details) => {
 
 const setJSONContentType = (e) => {
   for (const i in e.responseHeaders) {
-    if (e.responseHeaders[i].name.toLowerCase().includes('content-type')) {
+    if (e.responseHeaders[i].name.toLowerCase().includes('content-type') && e.responseHeaders[i].value.toLowerCase().includes('application/cbor')) {
       e.responseHeaders[i].value = 'application/json'
+      cborURLs[e.url] = true
     }
   }
   return { responseHeaders: e.responseHeaders }
