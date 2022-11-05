@@ -8,10 +8,8 @@ const cborURLs = {}
 const listener = (details) => {
   let filter = browser.webRequest.filterResponseData(details.requestId)
 
-  console.log('event', details.requestId)
   const data = []
   filter.ondata = (event) => {
-    console.log('ondata')
     if (!cborURLs[details.url]) {
       filter.write(event.data)
       filter.disconnect()
@@ -21,7 +19,6 @@ const listener = (details) => {
   }
 
   filter.onstop = (event) => {
-    console.log('stop')
     if (!cborURLs[details.url]) {
       filter.disconnect()
       return
@@ -47,11 +44,8 @@ const setJSONContentType = (e) => {
 
 browser.webRequest.onBeforeRequest.addListener(
   listener,
-  {
-    urls: [ target ],
-    types: [ 'main_frame', 'script', 'sub_frame', 'xmlhttprequest', 'other' ]
-  },
-  ['blocking']
+  { urls: [target] },
+  ['blocking'],
 )
 
 browser.webRequest.onHeadersReceived.addListener(
