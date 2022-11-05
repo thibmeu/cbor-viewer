@@ -5,7 +5,7 @@ This is an addon for Firefox. It decodes DAG-CBOR to DAG-JSON, making it render 
 ## Install
 
 1. Download the latest [cbor_decoder](https://github.com/thibmeu/dagcbor-decoder-extension/releases)
-2. [`about:debugging#/runtime/this-firefox`](about:debugging#/runtime/this-firefox) and load downloaded extension.
+2. [`about:debugging#/runtime/this-firefox`](about:debugging#/runtime/this-firefox) and load the downloaded extension.
 
 ## Development
 
