@@ -1,10 +1,11 @@
 # CBOR to JSON decoder extension
 
-This is an addon for Firefox. It decodes DAG-CBOR to DAG-JSON, making it render using the browser JSON engine.
+This is an addon for Firefox. It decodes [CBOR](https://cbor.io/) to JSON, making it render using the browser JSON engine.
+Decoding options are the ones of [DAG-CBOR](https://ipld.io/docs/codecs/known/dag-cbor/) and encoding are [DAG-JSON](https://ipld.io/docs/codecs/known/dag-json/). This is slightly more restrictive than the CBOR spec, but allows for a smooth JSON view.
 
 ## Install
 
-1. Download the latest [cbor_decoder](https://github.com/thibmeu/dagcbor-decoder-extension/releases).
+1. Download the latest [cbor_viewer](https://github.com/thibmeu/cbor-viewer/releases).
 2. [`about:addons`](about:addons) and load the downloaded extension.
 
 ## Development
