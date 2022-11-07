@@ -22,9 +22,9 @@ jobs:
     - name: 💎 upload artifact
       uses: actions/upload-artifact@v3
       with:
-        path: web-ext-artifacts/cbor_decoder-0.0.1.zip
+        path: 'web-ext-artifacts/cbor_viewer.zip'
     - name: 🚀 deploy
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-       files: 'web-ext-artifacts/cbor_decoder-0.0.1.zip'
+       files: 'web-ext-artifacts/cbor_viewer.zip'
