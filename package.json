@@ -14,6 +14,7 @@
   "dependencies": {
     "@ipld/dag-cbor": "^8.0.0",
     "@ipld/dag-json": "^9.0.1",
+    "cborg": "^1.9.5",
     "esbuild": "^0.15.13",
     "web-ext": "^7.3.1"
   }

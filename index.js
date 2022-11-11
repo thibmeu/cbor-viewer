@@ -1,12 +1,14 @@
-import { decode as cborDecode } from '@ipld/dag-cbor'
-import { encode as jsonEncode } from '@ipld/dag-json'
+import { decode as cborDecode } from 'cborg'
+import { decode as dagcborDecode } from '@ipld/dag-cbor'
+import { encode as dagjsonEncode } from '@ipld/dag-json'
+
 
 const target = '<all_urls>'
 
 const cborURLs = {}
 
 const listener = (details) => {
-  let filter = browser.webRequest.filterResponseData(details.requestId)
+  const filter = browser.webRequest.filterResponseData(details.requestId)
 
   const data = []
   filter.ondata = (event) => {
@@ -19,12 +21,13 @@ const listener = (details) => {
   }
 
   filter.onstop = (event) => {
-    if (!cborURLs[details.url]) {
+    const decode = cborURLs[details.url]
+    if (!decode) {
       filter.disconnect()
       return
     }
     const flatten = new Uint8Array(data.flatMap(x => [...x.values()]))
-    const jData = jsonEncode(cborDecode(flatten))
+    const jData = dagjsonEncode(decode(flatten))
     filter.write(jData)
     filter.disconnect()
   }
@@ -33,24 +36,26 @@ const listener = (details) => {
 }
 
 const setJSONContentType = (e) => {
+  const responseHeaders = []
   for (const i in e.responseHeaders) {
-    if (e.responseHeaders[i].name.toLowerCase().includes('content-type') && e.responseHeaders[i].value.toLowerCase().includes('application/cbor')) {
-      e.responseHeaders[i].value = 'application/json'
-      cborURLs[e.url] = true
+    let { name, value } = e.responseHeaders[i]
+    if (name.toLowerCase() === 'content-type' && value.includes('application/cbor')) {
+      cborURLs[e.url] = dagcborDecode
+      value = 'application/json'
     }
+    if (name.toLowerCase() === 'content-type' && value.includes('application/vnd.ipld.dag-cbor')) {
+      cborURLs[e.url] = dagcborDecode
+      value = 'application/json'
+    }
+    responseHeaders.push({ name, value })
   }
-  return { responseHeaders: e.responseHeaders }
+  return { responseHeaders }
 }
 
 browser.webRequest.onBeforeRequest.addListener(
-  listener,
-  { urls: [target] },
-  ['blocking'],
+  listener, { urls: [target] }, ['blocking'],
 )
 
 browser.webRequest.onHeadersReceived.addListener(
-  setJSONContentType,
-  { urls: [target] },
-  ['blocking', 'responseHeaders'],
+  setJSONContentType, { urls: [target] }, ['blocking', 'responseHeaders'],
 )
-
