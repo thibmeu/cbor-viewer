@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "dagcbor-decoder-extension",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Browser extension decoding dag json",
   "main": "index.js",
   "scripts": {
