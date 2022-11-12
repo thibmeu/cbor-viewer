@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <body>
-    <label for="decode-method">Decoding method:</label>
-    <select name="decode-method" id="decode-method">
-      <option value="auto" selected>Auto</option>
-      <option value="cbor">CBOR</option>
-      <option value="dag-cbor">DAG-CBOR</option>
-    </select>
-    <br>
-    <label for="encode-method">Encode method:</label>
-    <select name="encode-method" id="encode-method">
-      <option value="auto" selected>Auto</option>
-      <option value="json">JSON</option>
-      <option value="dag-json">DAG-JSON</option>
-    </select>
+
+<body>
+  <table>
+    <tr>
+      <td>
+        <label for="decode-method">Decoding method</label>
+      </td>
+      <td>
+        <select name="decode-method" id="decode-method">
+          <option value="auto" selected>Auto</option>
+          <option value="cbor">CBOR</option>
+          <option value="dag-cbor">DAG-CBOR</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="encode-method">Encode method</label>
+      </td>
+      <td>
+        <select name="encode-method" id="encode-method">
+          <option value="auto" selected>Auto</option>
+          <option value="json">JSON</option>
+          <option value="dag-json">DAG-JSON</option>
+        </select>
+      </td>
+    </tr>
 
     <script src="user_settings.js"></script>
-  </body>
+</body>
+
 </html>

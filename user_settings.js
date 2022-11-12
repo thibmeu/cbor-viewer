@@ -2,7 +2,6 @@ const updateSettingListener = async (e) => {
   const name = e.target.id
   const value = e.target.value
   await browser.storage.local.set(Object.fromEntries([[name, value]]))
-  console.log('set', name, value)
 }
 
 const restoreSetting = async (el) => {
